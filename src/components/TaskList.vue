@@ -3,23 +3,22 @@ import { ref } from 'vue';
 import { getStore, setStore } from '@/utils/utils';
 import TaskCard from './TaskCard.vue';
 import type { taskProp } from '@/model';
-const {taskStore } = defineProps<{
+const {taskStore,updateTask } = defineProps<{
     taskStore: taskProp[]
+    updateTask: (value:taskProp[])=>void;
 }>()
-const emit = defineEmits<{
-    (event: 'update-task', value: taskProp[]): void
-}>()
+
 const handleDelete=(id:string)=>{
     const newValue=taskStore.filter((task)=>task.id!==id)
     console.log(newValue)
-    emit("update-task", newValue)
+    updateTask(newValue)
     setStore("task",newValue)
 
 }
 const handleEdit=(task:taskProp)=>{
     const newValue=taskStore.map((obj)=>obj.id==task.id?task:obj)
     console.log(newValue)
-    emit("update-task", newValue)
+    updateTask(newValue)
     setStore("task",newValue)
 
 }
@@ -39,7 +38,7 @@ const handleEdit=(task:taskProp)=>{
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(task, index) in taskStore" :key="index">
+            <tr v-for="(task, index) in taskStore" :key="task.id">
                 <TaskCard :index="index" :task="task" :handleDelete="handleDelete"
                 :handleEdit="handleEdit"/>
                

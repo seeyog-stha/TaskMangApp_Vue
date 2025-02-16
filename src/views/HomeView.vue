@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TaskForm from '@/components/TaskForm.vue';
 import TaskList from '@/components/TaskList.vue';
+import TaskFilter from '@/components/TaskFilter.vue';
 import { ref } from 'vue';
 import { getStore } from '@/utils/utils';
 import type { taskProp } from '@/model';
@@ -14,9 +15,8 @@ const updateTaskStore = (newValue: taskProp[]) => {
 
 <template>
   <main>
-    <p>hi there</p>
-
-    <TaskList :taskStore="taskStore" @update-task="updateTaskStore"/>
-    <TaskForm :taskStore="taskStore" @update-task="updateTaskStore" />
+    <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore"/>
+    <TaskList :taskStore="taskStore" :updateTask="updateTaskStore"/>
+    <TaskForm :taskStore="taskStore" :updateTask="updateTaskStore" />
   </main>
 </template>

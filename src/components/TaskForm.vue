@@ -5,12 +5,11 @@ import { formatDate, setStore, getStore } from '@/utils/utils';
 import generateUniqueId from 'generate-unique-id';
 import type { taskProp } from '@/model';
 
-const { taskStore } = defineProps<{
+const { taskStore, updateTask } = defineProps<{
     taskStore: taskProp[]
+    updateTask: (value:taskProp[])=>void;
 }>()
-const emit = defineEmits<{
-    (event: 'update-task', value: taskProp[]): void
-}>()
+
 
 const initialValue = {
     title: "",
@@ -30,7 +29,7 @@ const handleSubmit = () => {
 
     const updatedStore = taskStore ? [...taskStore, newTask] : [newTask];
 
-    emit("update-task", updatedStore)
+    updateTask(updatedStore)
 
     const isSubmitted = setStore("task", updatedStore);
     console.log("is", isSubmitted)
