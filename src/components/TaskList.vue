@@ -1,9 +1,30 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
-import { getStore } from '@/utils/utils';
+import { getStore, setStore } from '@/utils/utils';
 import TaskCard from './TaskCard.vue';
-const initialList = getStore("task")
-const taskList = ref(initialList)
+import type { taskProp } from '@/model';
+const {taskStore } = defineProps<{
+    taskStore: taskProp[]
+}>()
+const emit = defineEmits<{
+    (event: 'update-task', value: taskProp[]): void
+}>()
+const handleDelete=(id:string)=>{
+    const newValue=taskStore.filter((task)=>task.id!==id)
+    console.log(newValue)
+    emit("update-task", newValue)
+    setStore("task",newValue)
+
+}
+const handleEdit=(task:taskProp)=>{
+    const newValue=taskStore.map((obj)=>obj.id==task.id?task:obj)
+    console.log(newValue)
+    emit("update-task", newValue)
+    setStore("task",newValue)
+
+}
+
+
 </script>
 <template>
     <table>
@@ -13,12 +34,14 @@ const taskList = ref(initialList)
                 <th>Title</th>
                 <th>Date</th>
                 <th>Priority</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(task, index) in taskList" :key="index">
-                <TaskCard :index="index" :task="task"/>
+            <tr v-for="(task, index) in taskStore" :key="index">
+                <TaskCard :index="index" :task="task" :handleDelete="handleDelete"
+                :handleEdit="handleEdit"/>
                
             </tr>
         </tbody>

@@ -1,7 +1,17 @@
-<script setup>
+<script setup lang="ts">
 
 import { ref } from 'vue';
 import { formatDate, setStore, getStore } from '@/utils/utils';
+import generateUniqueId from 'generate-unique-id';
+import type { taskProp } from '@/model';
+
+const { taskStore } = defineProps<{
+    taskStore: taskProp[]
+}>()
+const emit = defineEmits<{
+    (event: 'update-task', value: taskProp[]): void
+}>()
+
 const initialValue = {
     title: "",
     date: formatDate(Date.now()),
@@ -11,8 +21,16 @@ const initialValue = {
 }
 const store = ref(initialValue);
 const handleSubmit = () => {
-    const localstore = getStore("task")
-    const updatedStore = localstore ? [...localstore, store.value] : [store.value];
+    const idvalue = generateUniqueId();
+    const newTask = {
+        id:idvalue,
+        isCompleted: false,
+        ...store.value
+    }
+
+    const updatedStore = taskStore ? [...taskStore, newTask] : [newTask];
+
+    emit("update-task", updatedStore)
 
     const isSubmitted = setStore("task", updatedStore);
     console.log("is", isSubmitted)
@@ -22,7 +40,7 @@ const handleSubmit = () => {
 <template>
     <form @submit.prevent="handleSubmit">
         <label for="title">Title</label>
-        <input type="text" v-model="store.title" placeholder="Title" id="title">
+        <input type="text" v-model="store.title" placeholder="Title" id="title" maxlength="50">
         <label for="date">Date</label>
         <input type="date" v-model="store.date" id="date">
         <label for="priority">Priority</label>
