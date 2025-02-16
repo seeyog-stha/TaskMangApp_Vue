@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue';
 import type { taskProp } from '@/model';
+import ToggleButton from './ToggleButton.vue';
 const { updateTask, initialTaskStore } = defineProps<{
     initialTaskStore: taskProp[]
     updateTask: (value: taskProp[]) => void;
@@ -9,6 +10,7 @@ const isFilterEnabled = ref(false)
 const filterStatus = ref(false)
 const sortDate = ref("None")
 const searchValue = ref("")
+
 const handleIsFilterEnabled = async () => {
     isFilterEnabled.value = !isFilterEnabled.value;
     await nextTick();
@@ -43,7 +45,7 @@ watch(sortDate, (newValue) => {
     updateTask(sortedTasks);
 });
 watch(searchValue, (newValue) => {
-    
+
     const searchTask = initialTaskStore.filter((task) => task.title.toLowerCase().includes(newValue.toLowerCase()));
     console.log(searchTask)
     updateTask(searchTask)
@@ -52,22 +54,60 @@ watch(searchValue, (newValue) => {
 
 </script>
 <template>
-    <div>
-        <label for="isFilterEnabled">Enable Filter</label>
-        <input type="checkbox" :checked="isFilterEnabled" @change="handleIsFilterEnabled" id="isFilterEnabled">
+    <div class="container">
+        <div class="filter-container">
+            <div>
 
-        <label for="sortStatus" v-if="filterStatus">Completed</label>
-        <label for="sortStatus" v-if="!filterStatus">Pending</label>
-        <input type="checkbox" :disabled="!isFilterEnabled" id="sortStatus" :checked="filterStatus"
-            @change="handleSortByStatus">
+                <!-- enable filter      -->
+               <ToggleButton title="Enable Filter" :checked="isFilterEnabled"  :updateChecked="handleIsFilterEnabled"/>
 
-        <label for="sortDate">Sort by date:</label>
-        <select v-model="sortDate" id="sortDate">
-            <option>None</option>
-            <option>Ascending</option>
-            <option>Descending</option>
-        </select>
-        <label for="search">Search:</label>
-        <input type="text" v-model="searchValue" id="search"/>
+                <!-- enable status filter  -->
+                <ToggleButton  :isDisabled="!isFilterEnabled"  :title="`${isFilterEnabled ? 'Completed' : 'Pending'}`":checked="filterStatus"  :updateChecked="handleSortByStatus"/>
+            </div>
+            <div>
+
+                <!-- sort a/c to date    -->
+                <div class="select-container date">
+
+                    <label for="sortDate" class="select-label">Sort by date:</label>
+                    <select v-model="sortDate" id="sortDate" class="select-select">
+                        <option>None</option>
+                        <option>Ascending</option>
+                        <option>Descending</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="search-container">
+            <!-- search bar -->
+
+            <div class="input-container">
+            <input type="text" id="searchvalue" v-model="searchValue" class="input-field"
+                placeholder="Search" maxlength="50">
+        </div>
+        </div>
     </div>
 </template>
+<style scoped>
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .filter-container {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .filter-container>div {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.date{
+    width: 20vw;
+}
+
+</style>

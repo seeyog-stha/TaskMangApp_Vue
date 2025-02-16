@@ -7,7 +7,7 @@
 
     <header>
       <div class="title">
-        <h2>Task Management System</h2>
+        <h2 >Task Management System</h2>
       </div>
 
     </header>
@@ -24,11 +24,12 @@
 
 header {
   /* width: 100vw; */
-  background-color: #1484e4;
+  background-color: #2C3930;
   padding: 15px;
   text-align: center;
   position: sticky;
   top:0;
+  z-index: 50;
 }
 
 header h2 {
