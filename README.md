@@ -1,33 +1,48 @@
-# TaskManagementApp
+# Task Management App
 
-This template should help get you started developing with Vue 3 in Vite.
+## Features
 
-## Recommended IDE Setup
+- Display a list of tasks.
+- Add a new task.
+- Edit an existing task.
+- Delete a task.
+- Mark a task as completed.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Additional Features
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Filter tasks based on completion status.
+- Sort tasks by date.
+- Search for specific tasks by name.
 
 ## Project Setup
 
+### Install Dependencies
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
+### Run the Project in Development Mode
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
+### Build for Production
 ```sh
 npm run build
 ```
+
+### Preview the Production Build
+```sh
+npm run preview
+```
+
+## Technologies Used
+- Vue.js
+- Vite
+- generate-unique-id (for assigning unique id to the task)
+
+## Contributing
+If you would like to contribute, feel free to submit a pull request or open an issue.
+
+
+
