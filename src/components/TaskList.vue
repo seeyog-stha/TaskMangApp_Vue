@@ -30,7 +30,7 @@ const handleEdit = (task: taskProp) => {
 
 </script>
 <template class="table-container">
-    <div class="table-wrapper" v-if="taskStore.length > 0">
+    <div class="table-wrapper" v-if="taskStore?.length > 0">
 
         <table class="custom-table">
             <!-- table header  -->
@@ -174,4 +174,5 @@ const handleEdit = (task: taskProp) => {
         transform: translateY(10px);
     }
 }
+
 </style>

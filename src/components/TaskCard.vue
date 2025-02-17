@@ -60,8 +60,8 @@ const computePriority = () => {
     <td>
         <!-- edit button  -->
         <button @click="toggleEditable" v-if="!isEditable">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" >
                 <path d="M12 20h9"></path>
                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
             </svg>
@@ -69,8 +69,8 @@ const computePriority = () => {
         </button>
         <!-- save button  -->
         <button @click="handleSave" v-if="isEditable">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l3 3v13a2 2 0 0 1-2 2Z"></path>
                 <path d="M7 3v5h8V3"></path>
                 <path d="M10 14h4"></path>
@@ -79,8 +79,8 @@ const computePriority = () => {
         </button>
         <!-- delete button  -->
         <button @click="handleDelete(task.id)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 6h18"></path>
                 <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                 <path d="M10 11v6"></path>
@@ -146,7 +146,17 @@ button{
     border-radius: 90%;
     margin: 0px 3px;
     color: gray;
-    border-color: gray;
-};
+    border-color: transparent;
+    cursor: pointer;
+}
+button:hover{
+    color: black;
+}
+/* for mobile screen  */
+@media only screen and (max-width: 600px) {
+  button{
+    margin: 3px;
+  }
+}
 
 </style>
