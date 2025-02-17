@@ -13,6 +13,7 @@
 - Filter tasks based on completion status.
 - Sort tasks by date.
 - Search for specific tasks by name.
+- Theme changer
 
 ## Project Setup
 
