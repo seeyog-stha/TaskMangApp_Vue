@@ -5,9 +5,9 @@
 // checked provide checked-value to the component 
 // updateChecked is the function to updated checked-value 
 // isDisabled to disable the component 
-const { title, checked, updateChecked, isDisabled=false } = defineProps < {
+const { title, checked=false, updateChecked, isDisabled=false } = defineProps < {
     title?: string,
-    checked: boolean,
+    checked: boolean ,
     isDisabled?:boolean,
     updateChecked: () => void;
 } > ()

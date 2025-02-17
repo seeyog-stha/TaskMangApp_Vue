@@ -2,7 +2,7 @@
 import { nextTick, onMounted, ref } from 'vue';
 import { getStore, setStore } from './utils/utils';
 import ToggleButton from './components/ToggleButton.vue';
-const isDarkMode = ref(getStore("theme"))
+const isDarkMode = ref(getStore("theme")??false)
 const toggleTheme=async()=>{
   isDarkMode.value = !isDarkMode.value;
   await nextTick()
