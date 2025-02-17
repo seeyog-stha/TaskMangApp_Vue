@@ -1,3 +1,4 @@
+// type of task 
 export interface taskProp {
     id: string,
     title: string,

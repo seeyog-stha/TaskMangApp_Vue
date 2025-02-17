@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import notFoundImage from "@/assets/notfound.avif";
-import { getStore, setStore } from '@/utils/utils';
+import { setStore } from '@/utils/utils';
 import TaskCard from './TaskCard.vue';
 import type { taskProp } from '@/model';
 const { taskStore, updateTask } = defineProps<{
     taskStore: taskProp[]
     updateTask: (value: taskProp[]) => void;
 }>()
-
+ 
+// function to handle delete 
+// function requires id as parameter to delete the specific task 
 const handleDelete = (id: string) => {
     const newValue = taskStore.filter((task) => task.id !== id)
-    console.log(newValue)
     updateTask(newValue)
     setStore("task", newValue)
 
 }
+// function to handle edit 
+// function requies the task as prameter to edit the specific task 
 const handleEdit = (task: taskProp) => {
     const newValue = taskStore.map((obj) => obj.id == task.id ? task : obj)
     console.log(newValue)
@@ -23,33 +25,37 @@ const handleEdit = (task: taskProp) => {
     setStore("task", newValue)
 
 }
-console.log("taskstorre", taskStore)
 
 
 </script>
 <template class="table-container">
-    <table class="custom-table" v-if="taskStore.length > 0">
-        <thead>
-            <tr>
-                <th>S.N.</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
+    <div class="table-wrapper" v-if="taskStore.length > 0">
 
+        <table class="custom-table">
+            <!-- table header  -->
+            <thead>
+                <tr>
+                    <th>S.N.</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-        <transition-group name="task" tag="tbody">
+            <!-- tbody with animation  -->
+            <transition-group name="task" tag="tbody">
 
-            <tr v-for="(task, index) in taskStore" :key="task.id" class="task-item">
-                <TaskCard :index="index" :task="task" :handleDelete="handleDelete" :handleEdit="handleEdit" />
+                <tr v-for="(task, index) in taskStore" :key="task.id" class="task-item">
+                    <TaskCard :index="index" :task="task" :handleDelete="handleDelete" :handleEdit="handleEdit" />
 
-            </tr>
-        </transition-group>
+                </tr>
+            </transition-group>
 
-    </table>
+        </table>
+    </div>
+    <!-- show not found if no data  -->
     <div v-else class="not-found">
         <img :src="notFoundImage" alt="not-found" width="500" height="500" />
 
@@ -63,10 +69,15 @@ console.log("taskstorre", taskStore)
 
 /* Container Styling */
 .table-container {
-    overflow: auto;
     background-color: white;
     padding: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table-wrapper{
+    max-height: 75vh; 
+    overflow-y: auto;
     border-radius: 8px;
 }
 
@@ -98,7 +109,7 @@ console.log("taskstorre", taskStore)
     text-align: center;
 }
 
-/* Alternating Row Colors */
+
 .custom-table tbody tr:nth-child(even) {
     background-color: #f9fafb;
 }

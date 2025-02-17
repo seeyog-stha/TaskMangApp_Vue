@@ -15,14 +15,18 @@ const updateTaskStore = (newValue: taskProp[]) => {
 
 <template>
   <main>
-  
+
+    <!-- task filter component  -->
+
     <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore" class="sticky" />
     <div class="container">
       <div class="tasklist-container">
+        <!-- task list component  -->
 
-        <TaskList :taskStore="taskStore" :updateTask="updateTaskStore" class="tasklist"/>
+        <TaskList :taskStore="taskStore" :updateTask="updateTaskStore" class="tasklist" />
       </div>
       <div class="taskform-container">
+        <!-- task form component  -->
 
         <TaskForm :taskStore="taskStore" :updateTask="updateTaskStore" class="taskform" />
       </div>
@@ -32,28 +36,34 @@ const updateTaskStore = (newValue: taskProp[]) => {
   </main>
 </template>
 <style scoped>
+/* container css  */
 main .container {
 
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  
+
 }
-.tasklist-container{
+/* task list container  */
+.tasklist-container {
   width: 60%;
 
 }
-.tasklist{
+ 
+/* task list  */
+.tasklist {
   width: 100%;
 }
-.taskform-container{
+
+/* task form container  */
+.taskform-container {
   width: 35%;
   display: flex;
   justify-content: center;
 }
 
-
-.taskform{
+/* task form  */
+.taskform {
   width: 30%;
   position: fixed;
   padding: 10px;
@@ -67,5 +77,22 @@ main .container {
   z-index: 100;
   background-color: #3F4F44;
   color: white;
+}
+
+/* for mobile screen  */
+@media only screen and (max-width: 600px) {
+  main .container {
+    flex-direction: column;
+  }
+
+  .tasklist-container,
+  .taskform-container {
+    width: 100%;
+
+  }
+  .taskform{
+    position: relative;
+    width: 70%;
+  }
 }
 </style>

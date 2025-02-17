@@ -1,15 +1,24 @@
 <script setup lang="ts">
+// expected props are title value handleChange isDisabled
+// title gives the name to the component 
+// value provide value to the component 
+// handleChange is the function to updated value
+// isDisabled to disable the component 
 const { title, value, handleChange, isDisabled=false } = defineProps < {
     title: string,
     value: string|Date,
     isDisabled?:boolean,
-    handleChange: () => void;
+    handleChange: (value:string) => void;
 } > ()
+const handleDate = (event:Event)=>{
+    const input = event.target as HTMLInputElement
+    handleChange(input.value)
+}
 </script>
 <template>
     <label class="date-container">
         <span class="date-label">{{ title }}:</span>
-        <input type="date" id="date-input" :disabled="isDisabled" :value="value" @change="handleChange" class="date-input" />
+        <input type="date" id="date-input" :disabled="isDisabled" :value="value" @change="(event)=>handleDate(event)" class="date-input" />
     </label>
 </template>
 <style scoped>

@@ -1,5 +1,10 @@
 <script setup lang="ts">
 
+// expected props are title checked updated isDisabled
+// title gives the name to the component 
+// checked provide checked-value to the component 
+// updateChecked is the function to updated checked-value 
+// isDisabled to disable the component 
 const { title, checked, updateChecked, isDisabled=false } = defineProps < {
     title: string,
     checked: boolean,

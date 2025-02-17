@@ -11,28 +11,31 @@ const filterStatus = ref(false)
 const sortDate = ref("None")
 const searchValue = ref("")
 
+// function to handle enable filter 
 const handleIsFilterEnabled = async () => {
     isFilterEnabled.value = !isFilterEnabled.value;
     await nextTick();
     if (!isFilterEnabled.value) {
+        // if off reset the value to initial value 
         updateTask([...initialTaskStore])
     } else {
+        // sort the data ac to status 
         handleSortByStatus()
     }
 
 }
+// function to handle status 
 const handleSortByStatus = async () => {
     filterStatus.value = !filterStatus.value;
-    console.log("filter", filterStatus.value);
-    console.log("initialTaskStore", initialTaskStore);
 
-    await nextTick(); // Ensure state updates before filtering
+    await nextTick();
 
     const newTask = initialTaskStore.filter((task) => task.isCompleted === filterStatus.value);
-    console.log("Filtered Tasks:", newTask);
+
 
     updateTask(newTask);
 };
+// change the list on change of sortDate 
 watch(sortDate, (newValue) => {
     let sortedTasks = [...initialTaskStore];
 
@@ -44,6 +47,7 @@ watch(sortDate, (newValue) => {
 
     updateTask(sortedTasks);
 });
+// change list on change of search value 
 watch(searchValue, (newValue) => {
 
     const searchTask = initialTaskStore.filter((task) => task.title.toLowerCase().includes(newValue.toLowerCase()));
@@ -59,10 +63,11 @@ watch(searchValue, (newValue) => {
             <div>
 
                 <!-- enable filter      -->
-               <ToggleButton title="Enable Filter" :checked="isFilterEnabled"  :updateChecked="handleIsFilterEnabled"/>
+                <ToggleButton title="Enable Filter" :checked="isFilterEnabled" :updateChecked="handleIsFilterEnabled" />
 
                 <!-- enable status filter  -->
-                <ToggleButton  :isDisabled="!isFilterEnabled"  :title="`${isFilterEnabled ? 'Completed' : 'Pending'}`":checked="filterStatus"  :updateChecked="handleSortByStatus"/>
+                <ToggleButton :isDisabled="!isFilterEnabled" :title="`${filterStatus ? 'Completed' : 'Pending'}`"
+                    :checked="filterStatus" :updateChecked="handleSortByStatus" />
             </div>
             <div>
 
@@ -83,9 +88,9 @@ watch(searchValue, (newValue) => {
             <!-- search bar -->
 
             <div class="input-container">
-            <input type="text" id="searchvalue" v-model="searchValue" class="input-field"
-                placeholder="Search" maxlength="50">
-        </div>
+                <input type="text" id="searchvalue" v-model="searchValue" class="input-field" placeholder="Search"
+                    maxlength="50">
+            </div>
         </div>
     </div>
 </template>
@@ -106,8 +111,30 @@ watch(searchValue, (newValue) => {
     gap: 15px;
     align-items: center;
 }
-.date{
+
+.date {
     width: 20vw;
 }
 
+@media only screen and (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .container .filter-container {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .container .filter-container>div {
+
+        gap: 3px;
+
+    }
+
+    .date {
+        width: 40vw;
+    }
+}
 </style>

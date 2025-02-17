@@ -19,6 +19,8 @@ const initialValue = {
 
 }
 const store = ref(initialValue);
+const msg = ref("")
+// function to handel submit function 
 const handleSubmit = () => {
     const idvalue = generateUniqueId();
     const newTask = {
@@ -26,16 +28,35 @@ const handleSubmit = () => {
         isCompleted: false,
         ...store.value
     }
+    try{
+        
+        
+            const updatedStore = taskStore ? [...taskStore, newTask] : [newTask];
+        
+            
+            setStore("task", updatedStore);
+            updateTask(updatedStore)
+            // reset the value 
+            store.value = {
+                title: "",
+                date: formatDate(Date.now()),
+                priority: "low"
+        
+        
+            }
+            msg.value = "Task added!!"
+    }catch{
+        msg.value = "Error while adding Task"
 
-    const updatedStore = taskStore ? [...taskStore, newTask] : [newTask];
-
-    updateTask(updatedStore)
-
-    const isSubmitted = setStore("task", updatedStore);
-    console.log("is", isSubmitted)
+    }finally{
+        setTimeout(() => {
+         msg.value = ""
+    }, 3000);
+    }
+ 
 }
-const handleChange = (key: 'date', value: string) => {
-    store.value[key] = value
+const handleDateChange = (value: string) => {
+    store.value.date = value
 }
 
 </script>
@@ -43,13 +64,16 @@ const handleChange = (key: 'date', value: string) => {
 
     <form @submit.prevent="handleSubmit">
         <h4 class="title">Add New Task</h4>
+        <!-- title  -->
         <div class="input-container">
             <label for="title" class="input-label">Title:</label>
-            <input type="text" id="title" v-model="store.title" class="input-field"
-                placeholder="Title here..." maxlength="50" required>
+            <input type="text" id="title" v-model="store.title" class="input-field" placeholder="Title here..."
+                maxlength="50" required>
         </div>
+        <!-- date picker  -->
 
-        <DatePicker title="Date" :value="store.date" :handleChange="handleChange" />
+        <DatePicker title="Date" :value="store.date" :handleChange="handleDateChange" />
+        <!-- priority  -->
         <div class="select-container">
             <label for="priority" class="select-label">Priority:</label>
             <select id="priority" v-model="store.priority" class="select-select">
@@ -58,10 +82,12 @@ const handleChange = (key: 'date', value: string) => {
                 <option value="high">High</option>
             </select>
         </div>
+        <!-- submit button  -->
 
         <input type="submit" value="Submit" class="custom-button">
 
-
+        <!-- notification msg  -->
+        <p class="notification">{{ msg }}</p>
     </form>
 
 </template>
@@ -79,5 +105,8 @@ form {
     gap: 5px;
     /* position: fixed; */
 }
+.notification{
+    font-size: 0.875rem;
 
+}
 </style>

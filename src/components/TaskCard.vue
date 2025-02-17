@@ -12,14 +12,17 @@ const taskData = ref(task)
 const toggleEditable = () => {
     isEditable.value = !isEditable.value
 }
+// function to handle save 
 const handleSave = () => {
     handleEdit(taskData.value)
     isEditable.value = false
 }
+// function to handle task completed 
 const handleIsChecked = () => {
     taskData.value.isCompleted = !taskData.value.isCompleted
     handleEdit(taskData.value)
 }
+// function to provide css to the priority field 
 const computePriority = () => {
     if (taskData.value.priority == "low")
         return "low-priority"
@@ -31,10 +34,14 @@ const computePriority = () => {
 
 </script>
 <template>
+    <!-- index  -->
     <td>{{ index + 1 }}</td>
+    <!-- title  -->
     <td><input type="text" v-model="taskData.title" :disabled="!isEditable" class="input-style" maxlength="50" required>
     </td>
+    <!-- date  -->
     <td><input type="date" v-model="taskData.date" :disabled="!isEditable" class="input-style"></td>
+    <!-- priotity -->
     <td :class="computePriority()">
         <select v-model="taskData.priority" :disabled="!isEditable" class="input-style">
             <option>low</option>
@@ -42,12 +49,14 @@ const computePriority = () => {
             <option>high</option>
         </select>
     </td>
+    <!-- is completed  -->
     <td>
         <input type="checkbox" :id="`checkbox-${taskData.id}`" :checked="taskData.isCompleted"
             @change="handleIsChecked" />
         <label :for="`checkbox-${taskData.id}`" v-if="taskData.isCompleted">Completed</label>
         <label :for="`checkbox-${taskData.id}`" v-if="!taskData.isCompleted">Pending</label>
     </td>
+    <!-- buttons -->
     <td>
         <!-- edit button  -->
         <button @click="toggleEditable" v-if="!isEditable">
@@ -131,9 +140,13 @@ select:disabled {
     background-color: white;
     outline: none;
     transition: border-color 0.3s ease-in-out;
+    text-transform: capitalize;
 }
 button{
     border-radius: 90%;
     margin: 0px 3px;
-}
+    color: gray;
+    border-color: gray;
+};
+
 </style>
