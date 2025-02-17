@@ -17,6 +17,10 @@
 
 ## Project Setup
 
+### Node Version
+Node : v21.5.0
+Npm : 10.2.4
+
 ### Install Dependencies
 ```sh
 npm install
