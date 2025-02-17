@@ -2,9 +2,12 @@
 import { ref, watch, nextTick } from 'vue';
 import type { taskProp } from '@/model';
 import ToggleButton from './ToggleButton.vue';
-const { updateTask, initialTaskStore } = defineProps<{
-    initialTaskStore: taskProp[]
+import { getStore } from '@/utils/utils';
+// expected props 
+const { updateTask, taskStore } = defineProps<{
+    taskStore: taskProp[]
     updateTask: (value: taskProp[]) => void;
+
 }>()
 const isFilterEnabled = ref(false)
 const filterStatus = ref(false)
@@ -17,7 +20,9 @@ const handleIsFilterEnabled = async () => {
     await nextTick();
     if (!isFilterEnabled.value) {
         // if off reset the value to initial value 
-        updateTask([...initialTaskStore])
+        filterStatus.value = false
+        const store = getStore("task")
+        updateTask([...store])
     } else {
         // sort the data ac to status 
         handleSortByStatus()
@@ -27,17 +32,17 @@ const handleIsFilterEnabled = async () => {
 // function to handle status 
 const handleSortByStatus = async () => {
     filterStatus.value = !filterStatus.value;
-
     await nextTick();
+    const store = getStore("task")
 
-    const newTask = initialTaskStore.filter((task) => task.isCompleted === filterStatus.value);
+    const newTask = store.filter((task: taskProp) => task.isCompleted === filterStatus.value);
 
 
     updateTask(newTask);
 };
 // change the list on change of sortDate 
 watch(sortDate, (newValue) => {
-    let sortedTasks = [...initialTaskStore];
+    let sortedTasks = [...taskStore];
 
     if (newValue === "Ascending") {
         sortedTasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -49,8 +54,9 @@ watch(sortDate, (newValue) => {
 });
 // change list on change of search value 
 watch(searchValue, (newValue) => {
+    const store = getStore("task")
 
-    const searchTask = initialTaskStore.filter((task) => task.title.toLowerCase().includes(newValue.toLowerCase()));
+    const searchTask = store.filter((task: taskProp) => task.title.toLowerCase().includes(newValue.toLowerCase()));
     console.log(searchTask)
     updateTask(searchTask)
 

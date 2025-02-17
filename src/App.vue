@@ -1,4 +1,19 @@
 <script setup lang="ts">
+import { nextTick, onMounted, ref } from 'vue';
+import { getStore, setStore } from './utils/utils';
+import ToggleButton from './components/ToggleButton.vue';
+const isDarkMode = ref(getStore("theme"))
+const toggleTheme=async()=>{
+  isDarkMode.value = !isDarkMode.value;
+  await nextTick()
+  setStore("theme",isDarkMode.value)
+  document.documentElement.classList.toggle("dark-mode");
+}
+onMounted(()=>{
+  if (isDarkMode.value) {
+        document.documentElement.classList.add("dark-mode");
+      }
+})
 
 </script>
 
@@ -8,6 +23,10 @@
     <header>
       <div class="title">
         <h2 >Task Management System</h2>
+      </div>
+      <div class="theme-container">
+        <p>Theme</p>
+        <ToggleButton :checked="isDarkMode" :updateChecked="toggleTheme"/>
       </div>
 
     </header>
@@ -30,6 +49,8 @@ header {
   position: sticky;
   top:0;
   z-index: 50;
+  display: flex;
+  justify-content: space-between;
 }
 
 header h2 {
@@ -43,5 +64,10 @@ header h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.theme-container{
+  display: flex;
+  color: white;
+  gap: 5px;
 }
 </style>

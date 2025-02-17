@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import notFoundImage from "@/assets/notfound.avif";
-import { setStore } from '@/utils/utils';
+import { getStore, setStore } from '@/utils/utils';
 import TaskCard from './TaskCard.vue';
 import type { taskProp } from '@/model';
 const { taskStore, updateTask } = defineProps<{
@@ -19,7 +19,8 @@ const handleDelete = (id: string) => {
 // function to handle edit 
 // function requies the task as prameter to edit the specific task 
 const handleEdit = (task: taskProp) => {
-    const newValue = taskStore.map((obj) => obj.id == task.id ? task : obj)
+    const store = getStore("task")
+    const newValue = store.map((obj:taskProp) => obj.id == task.id ? task : obj)
     console.log(newValue)
     updateTask(newValue)
     setStore("task", newValue)
@@ -100,6 +101,7 @@ const handleEdit = (task: taskProp) => {
     border: 1px solid #d1d5db;
     text-align: left;
     font-weight: 600;
+    color: black;
 }
 
 /* Table Rows */
@@ -107,6 +109,7 @@ const handleEdit = (task: taskProp) => {
     padding: 12px;
     border: 1px solid #d1d5db;
     text-align: center;
+    color: black;
 }
 
 

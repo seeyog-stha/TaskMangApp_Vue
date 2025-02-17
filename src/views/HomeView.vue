@@ -18,7 +18,7 @@ const updateTaskStore = (newValue: taskProp[]) => {
 
     <!-- task filter component  -->
 
-    <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore" class="sticky" />
+    <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore" :taskStore="taskStore" class="sticky" />
     <div class="container">
       <div class="tasklist-container">
         <!-- task list component  -->
