@@ -62,7 +62,7 @@ const { title, checked=false, updateChecked, isDisabled=false } = defineProps < 
 }
 
 .checkbox-input:checked+.toggle-container {
-    background-color: #A27B5C;
+    background-color: black;
 }
 
 .toggle-knob {

@@ -1,15 +1,20 @@
 <script setup lang="ts">
-import TaskForm from '@/components/TaskForm.vue';
+import AddModal from '@/components/AddModal.vue';
 import TaskList from '@/components/TaskList.vue';
 import TaskFilter from '@/components/TaskFilter.vue';
 import { ref } from 'vue';
 import { getStore } from '@/utils/utils';
 import type { taskProp } from '@/model';
 
-const intialTaskStore = getStore("task")??[]
+const intialTaskStore = getStore("task") ?? []
 const taskStore = ref(intialTaskStore)
+const isModalVisible = ref(false)
 const updateTaskStore = (newValue: taskProp[]) => {
   taskStore.value = newValue
+}
+const handleModalVisible=(value:boolean)=>{
+  console.log("trigger")
+  isModalVisible.value = value
 }
 </script>
 
@@ -18,81 +23,31 @@ const updateTaskStore = (newValue: taskProp[]) => {
 
     <!-- task filter component  -->
 
-    <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore" :taskStore="taskStore" class="sticky" />
-    <div class="container">
-      <div class="tasklist-container">
-        <!-- task list component  -->
+    <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore" :taskStore="taskStore" :handleModalVisible="handleModalVisible"
+      class="sticky" />
+    <div class="tasklist-container">
+      <!-- task list component  -->
 
-        <TaskList :taskStore="taskStore" :updateTask="updateTaskStore" class="tasklist" />
-      </div>
-      <div class="taskform-container">
-        <!-- task form component  -->
-
-        <TaskForm :taskStore="taskStore" :updateTask="updateTaskStore" class="taskform" />
-      </div>
-
+      <TaskList :taskStore="taskStore" :updateTask="updateTaskStore" class="tasklist" />
     </div>
 
+
   </main>
+  <!-- add new task modal  -->
+  <AddModal :taskStore="taskStore" :updateTask="updateTaskStore" class="taskform" v-if="isModalVisible" :handleModalVisible="handleModalVisible"/>
 </template>
 <style scoped>
-/* container css  */
-main .container {
 
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-
-}
-/* task list container  */
-.tasklist-container {
-  width: 60%;
-
-}
- 
-/* task list  */
-.tasklist {
-  width: 100%;
-}
-
-/* task form container  */
-.taskform-container {
-  width: 35%;
-  display: flex;
-  justify-content: center;
-}
-
-/* task form  */
-.taskform {
-  width: 30%;
-  position: fixed;
-  padding: 10px;
+.tasklist-container{
+  padding: 2vh 4vw;
 }
 
 .sticky {
   position: sticky;
-  top: 70px;
+  top: 50px;
   z-index: 100;
-  padding: 15px;
+  padding: 5px;
   z-index: 100;
-  background-color: #3F4F44;
-  color: white;
 }
 
-/* for mobile screen  */
-@media only screen and (max-width: 600px) {
-  main .container {
-    flex-direction: column;
-  }
-
-  .tasklist-container,
-  .taskform-container {
-    width: 100%;
-
-  }
-  .taskform{
-    position: relative;
-    width: 70%;
-  }
-}
 </style>
