@@ -17,10 +17,10 @@ onMounted(()=>{
 
 </script>
 
-<template>
+<template >
   <div class="container">
 
-    <header>
+    <header class="primary-bg">
       <div class="title">
         <h2 >Task Management System</h2>
       </div>
@@ -42,10 +42,6 @@ onMounted(()=>{
 }
 
 header {
-  /* width: 100vw; */
-  background-color: #2C3930;
-  padding: 15px;
-  text-align: center;
   position: sticky;
   top:0;
   z-index: 50;
@@ -64,6 +60,7 @@ header h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px 20px;
 }
 .theme-container{
   display: flex;

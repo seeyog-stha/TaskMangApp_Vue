@@ -4,5 +4,5 @@ export interface taskProp {
     title: string,
     date: string|Date,
     priority: string,
-    isCompleted: boolean,
+    isCompleted: "Completed"|"Pending"|"In Progress",
   }

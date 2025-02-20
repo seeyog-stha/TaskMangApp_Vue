@@ -30,15 +30,14 @@ const handleEdit = (task: taskProp) => {
 
 </script>
 <template class="table-container">
-    <div class="table-wrapper" v-if="taskStore?.length > 0">
+    <div class="table-wrapper scrollbar" v-if="taskStore?.length > 0">
 
         <table class="custom-table">
             <!-- table header  -->
             <thead>
                 <tr>
-                    <th>S.N.</th>
                     <th>Title</th>
-                    <th>Date</th>
+                    <th>Due Date</th>
                     <th>Priority</th>
                     <th>Status</th>
                     <th></th>
@@ -70,10 +69,9 @@ const handleEdit = (task: taskProp) => {
 
 /* Container Styling */
 .table-container {
-    background-color: white;
-    padding: 16px;
+   
+    padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
 .table-wrapper{
@@ -86,39 +84,37 @@ const handleEdit = (task: taskProp) => {
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Table Header */
-.custom-table thead {
-    background-color: #e5e7eb;
-}
+
 
 .custom-table th {
-    padding: 12px;
-    border: 1px solid #d1d5db;
+    padding: 5px; 
     text-align: left;
-    font-weight: 600;
-    color: black;
+    font-weight: 500;
+    font-size: 1em;
+    color:#4860b5;
 }
 
 /* Table Rows */
 .custom-table td {
-    padding: 12px;
-    border: 1px solid #d1d5db;
+    padding: 3px;
     text-align: center;
-    color: black;
+    font-weight: 90;
+    font-size: 1.5em;
+}
+
+.custom-table tr{
+    border-bottom: 1px solid whitesmoke;
 }
 
 
-.custom-table tbody tr:nth-child(even) {
-    background-color: #f9fafb;
-}
+
 
 /* Row Hover Effect */
-.custom-table tbody tr:hover {
+tbody tr:hover {
     background-color: #f3f4f6;
     cursor: pointer;
 }
@@ -134,10 +130,7 @@ const handleEdit = (task: taskProp) => {
 }
 
 .task-item {
-    background: #f3f3f3;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
+
     transition: transform 0.2s ease-in-out;
 }
 
