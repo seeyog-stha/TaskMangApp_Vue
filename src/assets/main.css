@@ -1,11 +1,19 @@
 #app {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0.05em;
   max-width: 100%;
   margin: 0 auto;
   padding:0;
   font-weight: normal;
 }
 
-
+.primary-bg{
+  background-color: #4860b5;
+}
+.primary-color{
+  color: #4860b5;
+}
 /* theme changer  */
 :root {
   --bg-color: #ffffff;
@@ -26,8 +34,9 @@ body {
 /* input text css  */
 .input-container {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 1vh;
+  margin: 1vh 0;
 }
 
 .input-label {
@@ -36,9 +45,9 @@ body {
 
 .input-field {
   width: 100%;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
+  padding: 6px;
+  font-size: 0.875rem;
+  border: 1px solid#8ca3ec;
   border-radius: 5px;
   background-color: white;
   outline: none;
@@ -47,7 +56,8 @@ body {
 
 /* Change border color on focus */
 .input-field:focus {
-  border-color: #007bff;
+  border-color: #4860b5;
+  
 }
 
 /* Disabled input styling */
@@ -64,8 +74,10 @@ body {
 
 .select-container {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 1vh;
+  margin: 1vh 0;
+
 }
 
 .select-label {
@@ -77,7 +89,7 @@ body {
   width: 100%;
   padding: 6px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid#8ca3ec;
   border-radius: 5px;
   background-color: white;
   cursor: pointer;
@@ -87,7 +99,7 @@ body {
 
 
 .select-select:focus {
-  border-color: #007bff;
+  border-color: #4860b5;
 }
 
 
@@ -104,7 +116,7 @@ body {
   font-size: 14px;
   font-weight: 500;
   color: white;
-  background-color: #007bff;
+  background-color: #4860b5;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -125,5 +137,35 @@ body {
 .custom-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+/* scroll bar  */
+
+.scrollbar,body{
+  --sb-track-color: #dcddde;
+  --sb-thumb-color: #4860b5;
+  --sb-size: 7px;
+}
+
+.scrollbar::-webkit-scrollbar ,body::-webkit-scrollbar{
+  width: var(--sb-size)
+}
+
+.scrollbar::-webkit-scrollbar-track,body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb ,body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .scrollbar, body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
 }
 
