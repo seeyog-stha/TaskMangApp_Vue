@@ -4,29 +4,30 @@
 // value provide value to the component 
 // handleChange is the function to updated value
 // isDisabled to disable the component 
-const { title, value, handleChange, isDisabled=false } = defineProps < {
+const { title, value, handleChange, isDisabled = false } = defineProps<{
     title: string,
-    value: string|Date,
-    isDisabled?:boolean,
-    handleChange: (value:string) => void;
-} > ()
-const handleDate = (event:Event)=>{
+    value: string | Date,
+    isDisabled?: boolean,
+    handleChange: (value: string) => void;
+}>()
+const handleDate = (event: Event) => {
     const input = event.target as HTMLInputElement
     handleChange(input.value)
 }
 </script>
 <template>
     <label class="date-container">
-        <span class="date-label">{{ title }}:</span>
-        <input type="date" id="date-input" :disabled="isDisabled" :value="value" @change="(event)=>handleDate(event)" class="date-input" />
+        <span class="date-label ">{{ title }}:</span>
+        <input type="date" id="date-input" :disabled="isDisabled" :value="value" @change="(event) => handleDate(event)"
+            class="date-input" />
     </label>
 </template>
 <style scoped>
 .date-container {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
+    flex-direction: column;
+    gap: 1vh;
+    margin: 1vh 0;
 }
 
 .date-label {
@@ -43,7 +44,7 @@ const handleDate = (event:Event)=>{
 
     padding: 0.5rem 1rem;
 
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 1px solid#8ca3ec;
 
     outline: none;
 
@@ -51,7 +52,6 @@ const handleDate = (event:Event)=>{
 }
 
 .date-input:focus {
-    
-    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.5);
+    border-color: #4860b5;
 }
 </style>
