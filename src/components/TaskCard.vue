@@ -35,7 +35,7 @@ const handlePriority=(value:taskProp['isCompleted'])=>{
 <template>
 
     <!-- title  -->
-    <td><input type="text" v-model="taskData.title" :disabled="!isEditable" class="input-style" maxlength="50" required>
+    <td class="td-title"><input type="text" v-model="taskData.title" :disabled="!isEditable" class="input-style" maxlength="50" required>
     </td>
     <!-- date  -->
     <td><input type="date" v-model="taskData.date" :disabled="!isEditable" class="input-style"></td>
@@ -48,7 +48,7 @@ const handlePriority=(value:taskProp['isCompleted'])=>{
     <!-- is completed  -->
     <td>
         <select :id="`checkbox-${taskData.id}`" :value="taskData.isCompleted" @change="handleIsChecked($event)"
-            class="input-style">
+            class="input-style td-select">
             <option>Pending</option>
             <option>In Progress</option>
             <option>Completed</option>
@@ -57,7 +57,7 @@ const handlePriority=(value:taskProp['isCompleted'])=>{
 
     </td>
     <!-- buttons -->
-    <td>
+    <td class="btn-group">
         <!-- edit button  -->
         <button @click="toggleEditable" v-if="!isEditable">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -151,6 +151,16 @@ button:hover {
 @media only screen and (max-width: 600px) {
     button {
         margin: 3px;
+    }
+    .btn-group{
+        display: flex;
+        flex-direction: row;
+    }
+    .td-title input{
+        width: 30vw;
+    }
+    .td-select{
+        width: 25vw;
     }
 }
 </style>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import type { taskProp } from '@/model';
-const { value, handleChange, disabled ,index} = defineProps<{
+const { value, handleChange, disabled, index } = defineProps<{
     value: string,
     handleChange: (value: taskProp['isCompleted']) => void;
     disabled: boolean
-    index:number
+    index: number
 }>()
 
 const dropdownOpen = ref(false);
@@ -28,7 +28,7 @@ const toggleDropdown = () => {
 
 // Close dropdown when clicking outside
 const handleClickOutside = (event: Event) => {
-    const target = event.target as HTMLElement | null;  
+    const target = event.target as HTMLElement | null;
     if (target && !target.closest(`#custom-dropdown-${index}`)) {
         dropdownOpen.value = false;
     }
@@ -44,7 +44,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div :class="['custom-dropdown',{'border':!disabled}]" :id="`custom-dropdown-${index}`">
+    <div :class="['custom-dropdown', { 'border': !disabled }]" :id="`custom-dropdown-${index}`">
         <div class="selected-option" @click="toggleDropdown">
             <svg class="flag-icon" :fill="priorityOptions.find(opt => opt.value === value)?.color" viewBox="0 0 24 24">
                 <path d="M4 2v20h2v-8h7l1 2h6v-8h-6l-1-2H4z" />
@@ -66,13 +66,14 @@ onUnmounted(() => {
 <style scoped>
 .custom-dropdown {
     position: relative;
-    width: 150px;
+    width: 10vw;
     cursor: pointer;
     border-radius: 5px;
     padding: 5px;
     font-size: 14px;
 }
-.border{
+
+.border {
     background-color: white;
     border: 1px solid #ccc;
 
@@ -82,6 +83,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: 8px;
+
 }
 
 .flag-icon {
@@ -113,5 +115,13 @@ onUnmounted(() => {
 
 .dropdown-list li:hover {
     background-color: #f3f3f3;
+}
+
+/* for mobile screen  */
+@media only screen and (max-width: 600px) {
+    .custom-dropdown {
+
+        width: 25vw;
+    }
 }
 </style>

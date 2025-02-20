@@ -24,6 +24,7 @@ const handleModalVisible=(value:boolean)=>{
     <!-- task filter component  -->
 
     <TaskFilter :updateTask="updateTaskStore" :initialTaskStore="intialTaskStore" :taskStore="taskStore" :handleModalVisible="handleModalVisible"
+    :isModalVisible="isModalVisible"
       class="sticky" />
     <div class="tasklist-container">
       <!-- task list component  -->

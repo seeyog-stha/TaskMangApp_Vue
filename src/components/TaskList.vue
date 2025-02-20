@@ -84,7 +84,7 @@ const handleEdit = (task: taskProp) => {
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -100,7 +100,7 @@ const handleEdit = (task: taskProp) => {
 
 /* Table Rows */
 .custom-table td {
-    padding: 3px;
+    padding: 10px;
     text-align: center;
     font-weight: 90;
     font-size: 1.5em;

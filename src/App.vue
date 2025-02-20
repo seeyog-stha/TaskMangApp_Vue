@@ -66,5 +66,6 @@ header h2 {
   display: flex;
   color: white;
   gap: 5px;
+  align-items: center;
 }
 </style>
