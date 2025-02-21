@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import notFoundImage from "@/assets/notfound.avif";
+import notFoundImage from "@/assets/notfound.png";
 import { getStore, setStore } from '@/utils/utils';
 import TaskCard from './TaskCard.vue';
 import type { taskProp } from '@/model';
@@ -57,14 +57,16 @@ const handleEdit = (task: taskProp) => {
     </div>
     <!-- show not found if no data  -->
     <div v-else class="not-found">
-        <img :src="notFoundImage" alt="not-found" width="500" height="500" />
+        <img :src="notFoundImage" alt="not-found"/>
 
     </div>
 </template>
 <style>
 .not-found {
+    height: 60vh;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 /* Container Styling */
@@ -76,6 +78,7 @@ const handleEdit = (task: taskProp) => {
 
 .table-wrapper{
     max-height: 75vh; 
+    min-height: 75vh;
     overflow-y: auto;
     border-radius: 8px;
 }
@@ -100,7 +103,7 @@ const handleEdit = (task: taskProp) => {
 
 /* Table Rows */
 .custom-table td {
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     font-weight: 90;
     font-size: 1.5em;
@@ -119,15 +122,6 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-/* Responsive Table */
-@media (max-width: 768px) {
-
-    .custom-table th,
-    .custom-table td {
-        padding: 8px;
-        font-size: 14px;
-    }
-}
 
 .task-item {
 
@@ -166,6 +160,12 @@ tbody tr:hover {
         opacity: 0;
         transform: translateY(10px);
     }
+}
+
+@media only screen and (max-width: 600px) {
+  .not-found img{
+    width: 80%;
+  }
 }
 
 </style>

@@ -64,7 +64,8 @@ const handleDrawerVisible = (value: boolean) => {
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 0px 10px;
+    padding:10px;
+    border-bottom: 1px solid whitesmoke;
 }
 
 .container .filter-container {

@@ -102,7 +102,7 @@ onUnmounted(() => {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 5px 0;
-    z-index: 100;
+    z-index: 999;
 }
 
 .dropdown-list li {
