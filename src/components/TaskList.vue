@@ -120,6 +120,7 @@ const handleEdit = (task: taskProp) => {
 tbody tr:hover {
     background-color: #f3f4f6;
     cursor: pointer;
+    color: black;
 }
 
 
