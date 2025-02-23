@@ -38,7 +38,7 @@ const { taskStore, updateTask, handleModalVisible } = defineProps<{
 }
 
 .modal-container .form-container {
-    background-color: white;
+    background-color:  var(--bg-color);
     width: 30vw;
     height: 65vh;
     padding: 5vh 4vw;

@@ -140,7 +140,7 @@ const handleSortChange = (key: string, value: string) => {
 }
 
 .drawer-container .filter-container {
-    background-color: white;
+    background-color:  var(--bg-color);
     width: 15vw;
     height: 100vh;
     padding: 5vh 1vw;
